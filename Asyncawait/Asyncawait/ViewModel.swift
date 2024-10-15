@@ -70,6 +70,8 @@ final class ViewModel: ObservableObject {
                 //
                 
                 print("Fetched \(images.count) images.")
+            } catch is CancellationError { //  to check if it is handled
+                print("Task was canceled.")
             } catch {
                 print("Fetching images failed with error \(error)")
             }
@@ -129,8 +131,21 @@ final class ViewModel: ObservableObject {
     }
     
     
+    func accessingCounter() {
+        let counter = Counter()
+        // Incrementing the counter asynchronously
+        Task {
+            await counter.increment()
+            let currentValue = await counter.getValue()
+            print("Current Counter Value: \(currentValue)")
+        }
+    }
+    
+    
     deinit {
         loadingTask?.cancel()
         loadingTask = nil
     }
 }
+
+
