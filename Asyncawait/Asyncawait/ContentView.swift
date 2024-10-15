@@ -31,6 +31,7 @@ struct ContentView: View {
             }
             .frame(width: 250, height: 250)
             .border(Color.gray)
+            
         }
         .padding()
     }
